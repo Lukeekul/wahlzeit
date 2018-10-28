@@ -126,5 +126,21 @@ public class ValueTest {
 		String testString = test.asString();
 		assert (test == PhotoId.getIdFromString(testString));
 	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testCoordinate() {
+		Coordinate point1 = new Coordinate(1.0, 1.0, 0.0);
+		Coordinate point2 = new Coordinate(1.0, 1.0, 0.0);
+		Coordinate point3 = new Coordinate(2.0, 0.0, 1.0);
+		
+		assertTrue(point1.isEqual(point2));
+		assertTrue(!point3.isEqual(point2));
+		
+		assert(point1.getDistance(point2) == 0.0);
+		assert(point1.getDistance(point3) != 0.0);
+	}
 
 }
