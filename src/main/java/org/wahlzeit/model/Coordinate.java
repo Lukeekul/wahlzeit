@@ -9,6 +9,12 @@ public class Coordinate {
 	private double y;
 	private double z;
 	
+	public Coordinate(double MyX, double MyY, double MyZ) {
+		x = MyX;
+		y = MyY;
+		z = MyZ;
+	}
+	
 	public double getDistance(Coordinate point) {
 		
 		double distanceX = Math.pow(point.x - x, 2);
