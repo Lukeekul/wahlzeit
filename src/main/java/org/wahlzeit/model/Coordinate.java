@@ -27,5 +27,8 @@ public class Coordinate {
 		return false;
 	}
 	
+	public boolean equals(Coordinate point) {
+		return isEqual(point);
+	}
 
 }
