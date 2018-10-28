@@ -9,12 +9,13 @@ https://github.com/Lukeekul/wahlzeit
 https://travis-ci.org/Lukeekul/wahlzeit
 
 ## Current Tag
-adap-hw01
+adap-hw02 on master
 
 ## Diff to last tag
-https://github.com/Lukeekul/wahlzeit/compare/course_start...Lukeekul:adap-hw01
+https://github.com/Lukeekul/wahlzeit/compare/adap-hw01...Lukeekul:adap-hw02
 
 # Details
-* .travis.yml added
-* Three pictures of computer generated pattern added
+* The Project's main focus is on computer generated pattern images
+* Two new classes Location and Coordinate are added to wahlzeit
+* Simple Unit Test added to test  Coordinate Class
 * Travis build succeeded, tests passed
