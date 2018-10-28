@@ -31,6 +31,7 @@ import org.wahlzeit.services.DataObject;
 import org.wahlzeit.services.EmailAddress;
 import org.wahlzeit.services.Language;
 import org.wahlzeit.services.ObjectManager;
+import org.wahlzeit.model.Location;
 
 import java.util.Map;
 
@@ -121,6 +122,12 @@ public class Photo extends DataObject {
 	 * The default type is jpg
 	 */
 	protected String ending = "jpg";
+	
+	/**
+	 *  
+	 * 
+	 */
+	protected Location location;
 	
 	/**
 	 *
