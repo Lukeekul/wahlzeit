@@ -1,0 +1,22 @@
+{
+	"folders":
+	[
+		{
+			"path": "src/main/java/org/wahlzeit",
+			"name": "Main"
+		},
+		{
+			"path": "src/test/java/org/wahlzeit",
+			"name": "Test"
+		},
+		{
+			"path": "docs",
+			"name": "Doc",
+			"file_exclude_patterns": ["*.pdf"]
+		}
+	],
+	"settings":
+	{
+		"SublimeLinter.linters.javac.disable": false
+	}
+}
