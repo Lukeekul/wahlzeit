@@ -49,6 +49,14 @@ public class EmailAddressTest extends TestCase {
 	/**
 	 *
 	 */
+	public void testEmailAddressIllegalCharacters() {
+		/*for local testing illegal characters are allowed*/
+		assertTrue(createEmailAddressIgnoreException("ä@ä.de"));
+	}
+
+	/**
+	 *
+	 */
 	protected boolean createEmailAddressIgnoreException(String ea) {
 		try {
 			EmailAddress.getFromString(ea);
