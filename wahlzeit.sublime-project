@@ -17,6 +17,14 @@
 	],
 	"settings":
 	{
-		"SublimeLinter.linters.javac.disable": false
+		"SublimeLinter.linters.javac.disable": false,
+		"SublimeLinter.linters.javac.args":
+			[
+				"-cp",
+				"/usr/lib/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar",
+				// "/usr/share/java/ant/ant-junit4.jar",
+				"-sourcepath",
+				"${project_path}/src/main/java"
+			]
 	}
 }
