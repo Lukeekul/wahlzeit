@@ -21,8 +21,7 @@
 		"SublimeLinter.linters.javac.args":
 			[
 				"-cp",
-				"/usr/lib/eclipse/plugins/org.junit_4.12.0.v201504281640/junit.jar",
-				// "/usr/share/java/ant/ant-junit4.jar",
+				"$HOME/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/plugins/junit-4.12.jar",
 				"-sourcepath",
 				"${project_path}/src/main/java"
 			]
