@@ -21,7 +21,7 @@
 		"SublimeLinter.linters.javac.args":
 			[
 				"-cp",
-				"$HOME/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/plugins/junit-4.12.jar",
+				"$HOME/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/*:$HOME/.gradle/wrapper/dists/gradle-4.10-bin/bg6py687nqv2mbe6e1hdtk57h/gradle-4.10/lib/plugins/*:$HOME/.gradle/appengine-sdk/appengine-java-sdk-1.9.67/lib/impl/*",
 				"-sourcepath",
 				"${project_path}/src/main/java"
 			]
