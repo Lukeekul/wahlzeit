@@ -3,7 +3,7 @@ package org.wahlzeit.model;
 import org.wahlzeit.model.CartesianCoordinate;
 import java.lang.Math;
 
-public class SphericCoordinate {
+public class SphericCoordinate implements CoordinateInterface{
 
 	private double m_phi;
 	private double m_theta;
@@ -26,7 +26,7 @@ public class SphericCoordinate {
 		return 0.0;
 	}
 
-	public double getCentralAngel(SphericCoordinate point) {
+	public double getCentralAngle(SphericCoordinate point) {
 		return 0.0;
 	}
 
@@ -34,8 +34,15 @@ public class SphericCoordinate {
 		return 0.0;
 	}
 
-	public double getCentralAngel(CartesianCoordinate point) {
+	public double getCentralAngle(CartesianCoordinate point) {
 		return 0.0;
 	}
 
+	public boolean isEqual(CartesianCoordinate point) {
+		return false;
+	}
+
+	public boolean isEqual(SphericCoordinate point) {
+		return false;
+	}
 }
