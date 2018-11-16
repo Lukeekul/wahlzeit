@@ -3,7 +3,7 @@ package org.wahlzeit.model;
 import org.wahlzeit.model.CartesianCoordinate;
 import java.lang.Math;
 
-public class SphericCoordinate implements {
+public class SphericCoordinate {
 
 	private double m_phi;
 	private double m_theta;
