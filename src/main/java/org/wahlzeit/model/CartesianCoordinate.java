@@ -8,11 +8,18 @@ public class CartesianCoordinate implements CoordinateInterface{
 	private double m_x;
 	private double m_y;
 	private double m_z;
+	private final double ETTA = 10e-5;
 	
 	public CartesianCoordinate(double x, double y, double z) {
 		m_x = x;
 		m_y = y;
 		m_z = z;
+	}
+
+	public CartesianCoordinate(CartesianCoordinate point) {
+		m_x = point.m_x;
+		m_y = point.m_y;
+		m_z = point.m_z;
 	}
 	
 	public double getCartesianDistance(CartesianCoordinate point) {
@@ -25,16 +32,25 @@ public class CartesianCoordinate implements CoordinateInterface{
 	}
 
 	public double getCartesianDistance(SphericCoordinate point) {
-		return 0.0;
+		CartesianCoordinate tmp = point.asCartesianCoordinate();
+		return getCartesianDistance(tmp);
 	}
 	
-	public boolean isEqual(CartesianCoordinate point) {
+	public boolean isAlmostEqual(CartesianCoordinate point, double etta) {
+
+		double diff_x = Math.abs(m_x - point.m_x);
+		double diff_y = Math.abs(m_y - point.m_y);
+		double diff_z = Math.abs(m_z - point.m_z);
 		
-		if(point.m_x == m_x && point.m_y == m_y && point.m_z == m_z) {
+		if(diff_x < etta && diff_y < etta && diff_z < etta) {
 			return true;
 		}
 		
 		return false;
+	}
+
+	public boolean isEqual(CartesianCoordinate point) {
+		return isAlmostEqual(point, ETTA);
 	}
 	
 	public boolean equals(CartesianCoordinate point) {
@@ -46,24 +62,27 @@ public class CartesianCoordinate implements CoordinateInterface{
 	}
 
 	public double getCentralAngle(CartesianCoordinate point) {
-
-		return 0.0;
+		SphericCoordinate tmp_this = this.asSphericCoordinate();
+		SphericCoordinate tmp_other = point.asSphericCoordinate();
+		return tmp_this.getCentralAngle(tmp_other);
 
 	}
 
 	public double getCentralAngle(SphericCoordinate point) {
-
-		return 0.0;
+		SphericCoordinate tmp = this.asSphericCoordinate();
+		return tmp.getCentralAngle(point);
 	}
 
 	public SphericCoordinate asSphericCoordinate() {
-		return new SphericCoordinate(0.0,0.0,0.0);
+		double radius = Math.sqrt(Math.pow(m_x, 2) * Math.pow(m_y, 2) * Math.pow(m_z, 2));
+		double theta = Math.acos(m_z/radius);
+		double phi = Math.atan(m_y/m_x);
+		return new SphericCoordinate(phi, theta, radius);
 	}
 
 	public CartesianCoordinate asCartesianCoordinate() {
 		return this;
 	}
-
 
 }
 

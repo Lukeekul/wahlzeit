@@ -29,7 +29,8 @@ import org.wahlzeit.utils.*;
 	EmailAddressTest.class,
 	LogBuilderTest.class,
 	StringUtilTest.class,
-	VersionTest.class
+	VersionTest.class,
+	CoordinateTest.class
 })
 public class AllTests {
 
