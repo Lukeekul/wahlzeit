@@ -5,21 +5,21 @@ import java.lang.Math;
 
 public class CartesianCoordinate implements CoordinateInterface{
 	
-	private double x;
-	private double y;
-	private double z;
+	private double m_x;
+	private double m_y;
+	private double m_z;
 	
-	public CartesianCoordinate(double MyX, double MyY, double MyZ) {
-		x = MyX;
-		y = MyY;
-		z = MyZ;
+	public CartesianCoordinate(double x, double y, double z) {
+		m_x = x;
+		m_y = y;
+		m_z = z;
 	}
 	
 	public double getCartesianDistance(CartesianCoordinate point) {
 		
-		double distanceX = Math.pow(point.x - x, 2);
-		double distanceY = Math.pow(point.y - y, 2);
-		double distanceZ = Math.pow(point.z - z, 2);
+		double distanceX = Math.pow(point.m_x - m_x, 2);
+		double distanceY = Math.pow(point.m_y - m_y, 2);
+		double distanceZ = Math.pow(point.m_z - m_z, 2);
 		
 		return Math.sqrt(distanceX + distanceY + distanceZ);
 	}
@@ -30,7 +30,7 @@ public class CartesianCoordinate implements CoordinateInterface{
 	
 	public boolean isEqual(CartesianCoordinate point) {
 		
-		if(point.x == x && point.y == y && point.z == z) {
+		if(point.m_x == m_x && point.m_y == m_y && point.m_z == m_z) {
 			return true;
 		}
 		
