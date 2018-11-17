@@ -8,9 +8,12 @@ public class CartesianCoordinate implements CoordinateInterface{
 	private double m_x;
 	private double m_y;
 	private double m_z;
-	private final double ETTA = 10e-5;
+	private final double ETTA = 10e-7;
 	
 	public CartesianCoordinate(double x, double y, double z) {
+		assert x >= 0.0;
+		assert y >= 0.0;
+		assert z >= 0.0;
 		m_x = x;
 		m_y = y;
 		m_z = z;
@@ -74,10 +77,10 @@ public class CartesianCoordinate implements CoordinateInterface{
 	}
 
 	public SphericCoordinate asSphericCoordinate() {
-		double radius = Math.sqrt(Math.pow(m_x, 2) * Math.pow(m_y, 2) * Math.pow(m_z, 2));
+		double radius = Math.sqrt(Math.pow(m_x, 2) + Math.pow(m_y, 2) + Math.pow(m_z, 2));
 		double theta = Math.acos(m_z/radius);
 		double phi = Math.atan(m_y/m_x);
-		return new SphericCoordinate(phi, theta, radius);
+		return new SphericCoordinate(Math.toDegrees(phi), Math.toDegrees(theta), radius);
 	}
 
 	public CartesianCoordinate asCartesianCoordinate() {

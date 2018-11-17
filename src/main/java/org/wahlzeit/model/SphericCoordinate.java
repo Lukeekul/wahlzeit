@@ -8,11 +8,14 @@ public class SphericCoordinate implements CoordinateInterface{
 	private double m_phi;
 	private double m_theta;
 	private double m_radius;
-	private final double ETTA = 10e-5;
+	private final double ETTA = 10e-7;
 
-	public SphericCoordinate(double phi, double theta, double radius) {
-		m_phi =  phi;
-		m_theta = theta;
+	public SphericCoordinate(double phi_degree, double theta_degree, double radius) {
+		assert radius >= 0.0;
+		assert phi_degree >= 0.0 && phi_degree < 360.0;
+		// assert theta_degree >= 0.0 && theta_degree < 180.0;
+		m_phi =  Math.toRadians(phi_degree);
+		m_theta = Math.toRadians(theta_degree);
 		m_radius = radius;
 	}
 
