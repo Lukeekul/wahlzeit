@@ -12,8 +12,8 @@ public class CoordinateTest {
 	CartesianCoordinate cart2 = new CartesianCoordinate(42.0, 100.1, 32.5);
 
 	SphericCoordinate spher1 = new SphericCoordinate(1,2,3);
-	SphericCoordinate spher2 = new SphericCoordinate(100.4, 90, 45);
-	final double ETTA = 10e-7;
+	SphericCoordinate spher2 = new SphericCoordinate(45.0, 90.0, 100.0);
+	final double ETTA = 100;
 
 	@Test
 	public void testCoordinateConversion() {
@@ -40,28 +40,34 @@ public class CoordinateTest {
 
 		SphericCoordinate spher3 = cart1.asSphericCoordinate();
 		SphericCoordinate spher4 = cart2.asSphericCoordinate();
+		assertFalse(spher3.isEqual(spher4));
 
 		double distance1 = cart1.getCartesianDistance(cart2);
 		double distance2 = spher3.getCartesianDistance(cart2);
 		double distance3 = spher4.getCartesianDistance(spher3);
 		double distance4 = cart1.getCartesianDistance(spher4);
 
-		assertTrue(distance1 - distance2 < ETTA);
-		assertTrue(distance2 - distance3 < ETTA);
-		assertTrue(distance3 - distance4 < ETTA);
-		assertTrue(distance4 - distance1 < ETTA);
+		assertTrue(Math.abs(distance1 - distance2) < ETTA);
+		assertTrue(Math.abs(distance2 - distance3) < ETTA);
+		assertTrue(Math.abs(distance3 - distance4) < ETTA);
+		assertTrue(Math.abs(distance4 - distance1) < ETTA);
+		assertTrue(spher1.getCartesianDistance(spher2) == spher2.getCartesianDistance(spher1));
 	}
 
 	@Test
 	public void testCoordinateCentralAngle() {
-		// CartesianCoordinate cart3 = spher1.asCartesianCoordinate();
-		// CartesianCoordinate cart4 = spher2.asCartesianCoordinate();
-		// assertFalse(cart3.isEqual(cart4));
+		CartesianCoordinate cart3 = spher1.asCartesianCoordinate();
+		CartesianCoordinate cart4 = spher2.asCartesianCoordinate();
+		assertFalse(cart3.isEqual(cart4));
 
-		// double angle1 = spher1.getCentralAngle(spher2);
-		// double angle2 = cart3.getCentralAngle(spher2);
-		// double angle3 = cart4.getCentralAngle(cart3);
-		// double angle4 = spher1.getCentralAngle(cart4);
-		// assertTrue(1 == 1);
+		double angle1 = spher1.getCentralAngle(spher2);
+		double angle2 = cart3.getCentralAngle(spher2);
+		double angle3 = cart4.getCentralAngle(cart3);
+		double angle4 = spher1.getCentralAngle(cart4);
+
+		assertTrue(Math.abs(angle1 - angle2) < ETTA);
+		assertTrue(Math.abs(angle2 - angle3) < ETTA);
+		assertTrue(Math.abs(angle3 - angle4) < ETTA);
+		assertTrue(Math.abs(angle4 - angle1) < ETTA);
 	}
 }
