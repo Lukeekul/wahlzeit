@@ -1,9 +1,10 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.CartesianCoordinate;
 import java.lang.Math;
 
-public class SphericCoordinate implements CoordinateInterface{
+public class SphericCoordinate implements Coordinate{
 
 	private double m_phi;
 	private double m_theta;

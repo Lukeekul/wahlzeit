@@ -1,7 +1,10 @@
-package org.wahlzeit.model;
+package org.wahlzeit.interfaces;
+
+import org.wahlzeit.model.CartesianCoordinate;
+import org.wahlzeit.model.SphericCoordinate;
 
 
-public interface CoordinateInterface{
+public interface Coordinate{
 	public CartesianCoordinate asCartesianCoordinate();
 	public SphericCoordinate asSphericCoordinate();
 	public double getCartesianDistance(SphericCoordinate point);
