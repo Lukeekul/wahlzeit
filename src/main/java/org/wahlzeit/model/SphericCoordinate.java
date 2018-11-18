@@ -43,7 +43,14 @@ public class SphericCoordinate implements CoordinateInterface{
 	}
 
 	public double getCentralAngle(SphericCoordinate point) {
-		double centralAngle = 2 * Math.asin(Math.toRadians(getCartesianDistance(point) / (2 * m_radius)));
+
+		double delta_x = Math.cos(point.m_phi) * Math.cos(point.m_theta) - Math.cos(m_phi) * Math.cos(m_theta);
+		double delta_y = Math.cos(point.m_phi) * Math.sin(point.m_theta) - Math.cos(m_phi) * Math.sin(m_theta);
+		double delta_z = Math.sin(point.m_phi) - Math.sin(m_phi);
+
+		double chord_length = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2) + Math.pow(delta_z, 2));
+
+		double centralAngle = 2 * Math.asin( chord_length / 2);
 		return Math.toDegrees(centralAngle);
 	}
 
