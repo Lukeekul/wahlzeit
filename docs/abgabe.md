@@ -9,16 +9,16 @@ https://github.com/Lukeekul/wahlzeit
 https://travis-ci.org/Lukeekul/wahlzeit
 
 ## Current Tag
-adap-hw04 on master
+adap-hw05 on master
 
 ## Diff to last tag
-https://github.com/Lukeekul/wahlzeit/compare/adap-hw03...Lukeekul:adap-hw04
+https://github.com/Lukeekul/wahlzeit/compare/adap-hw04...Lukeekul:adap-hw05
 
 # Details
-* Added PatternPhoto.java, PatternPhotoManager.java and PatternPhotoFactory.java
-* No new Attributes for PatternPhoto Class, all member functions are public, Constructor calling super Class
-* PatternPhotoFactory overriding all member functions to return PatternPhoto Type, not quite sure if Factory is still singleton, maybe PhotoFactory should be abstract now?
-* Added PatternPhotoManager according to UML Spec
-* Not quite sure where to change Photo to PatternPhoto in wahlzeit?
+* Change Class Coordinate.java to CartesianCoordinate.java, add new Class SphericCoordinate.java
+* Add Interface Coordinate.java in package *org.wahlzeit.interfaces*
+* Both Coordinate Classes implement Coordinate Interface
+* Coordinate Classes implement methods to handle their own type and deligate of other type
+* Adding tests to ensure both Coordinate Classes are interchangable
 * Travis build succeeded, tests passed
 
