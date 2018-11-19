@@ -5,6 +5,7 @@ import org.wahlzeit.model.SphericCoordinate;
 import java.lang.Math;
 
 public class CartesianCoordinate implements Coordinate{
+// public class CartesianCoordinate {
 	
 	private double m_x;
 	private double m_y;

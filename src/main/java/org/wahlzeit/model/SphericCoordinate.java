@@ -52,7 +52,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public double getCartesianDistance(SphericCoordinate point) {
+	public double getCartesianDistance(Coordinate point) {
 		CartesianCoordinate tmp_this = this.asCartesianCoordinate();
 		CartesianCoordinate tmp_other = point.asCartesianCoordinate();
 		return tmp_this.getCartesianDistance(tmp_other);
@@ -61,31 +61,16 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public double getCentralAngle(SphericCoordinate point) {
-		double delta_x = Math.cos(point.m_phi) * Math.cos(point.m_theta) - Math.cos(m_phi) * Math.cos(m_theta);
-		double delta_y = Math.cos(point.m_phi) * Math.sin(point.m_theta) - Math.cos(m_phi) * Math.sin(m_theta);
-		double delta_z = Math.sin(point.m_phi) - Math.sin(m_phi);
+	public double getCentralAngle(Coordinate point) {
+		SphericCoordinate coordinate = point.asSphericCoordinate();
+		double delta_x = Math.cos(coordinate.m_phi) * Math.cos(coordinate.m_theta) - Math.cos(m_phi) * Math.cos(m_theta);
+		double delta_y = Math.cos(coordinate.m_phi) * Math.sin(coordinate.m_theta) - Math.cos(m_phi) * Math.sin(m_theta);
+		double delta_z = Math.sin(coordinate.m_phi) - Math.sin(m_phi);
 
 		double chord_length = Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2) + Math.pow(delta_z, 2));
 
 		double centralAngle = 2 * Math.asin( chord_length / 2);
 		return Math.toDegrees(centralAngle);
-	}
-
-	/*
-	 *
-	 */
-	public double getCartesianDistance(CartesianCoordinate point) {
-		CartesianCoordinate tmp = this.asCartesianCoordinate();
-		return  tmp.getCartesianDistance(point);
-	}
-
-	/*
-	 *
-	 */
-	public double getCentralAngle(CartesianCoordinate point) {
-		SphericCoordinate tmp = point.asSphericCoordinate();
-		return getCentralAngle(tmp);
 	}
 
 	/*
@@ -99,8 +84,8 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public boolean isEqual(SphericCoordinate point) {
-		return isAlmostEqual(point, ETTA);
+	public boolean isEqual(Coordinate point) {
+		return isAlmostEqual(point.asSphericCoordinate(), ETTA);
 	}
 
 	/*
