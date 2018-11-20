@@ -10,7 +10,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	private double m_x;
 	private double m_y;
 	private double m_z;
-	private final double ETTA = 10e-7;
 
 	/*
 	 *
@@ -37,53 +36,8 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 *
 	 */
 	@Override
-	public double getCartesianDistance(Coordinate point) {
-		CartesianCoordinate tmp = point.asCartesianCoordinate();
-		double distanceX = Math.pow(tmp.m_x - m_x, 2);
-		double distanceY = Math.pow(tmp.m_y - m_y, 2);
-		double distanceZ = Math.pow(tmp.m_z - m_z, 2);
-		
-		return Math.sqrt(distanceX + distanceY + distanceZ);
-	}
-
-	/*
-	 *
-	 */
-	public boolean isAlmostEqual(CartesianCoordinate point, double etta) {
-		double diff_x = Math.abs(m_x - point.m_x);
-		double diff_y = Math.abs(m_y - point.m_y);
-		double diff_z = Math.abs(m_z - point.m_z);
-		
-		if(diff_x < etta && diff_y < etta && diff_z < etta) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	/*
-	 *
-	 */
-	@Override
-	public boolean isEqual(Coordinate point) {
-		return isAlmostEqual(point.asCartesianCoordinate(), ETTA);
-	}
-
-	/*
-	 *
-	 */
-	public boolean equals(CartesianCoordinate point) {
-		return isEqual(point);
-	}
-
-	/*
-	 *
-	 */
-	@Override
-	public double getCentralAngle(Coordinate point) {
-		SphericCoordinate tmp_this = this.asSphericCoordinate();
-		SphericCoordinate tmp_other = point.asSphericCoordinate();
-		return tmp_this.getCentralAngle(tmp_other);
+	public CartesianCoordinate asCartesianCoordinate() {
+		return this;
 	}
 
 	/*
@@ -101,8 +55,30 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 *
 	 */
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
-		return this;
+	public double getCartesianDistance(Coordinate point) {
+		CartesianCoordinate tmp = point.asCartesianCoordinate();
+		double distanceX = Math.pow(tmp.m_x - m_x, 2);
+		double distanceY = Math.pow(tmp.m_y - m_y, 2);
+		double distanceZ = Math.pow(tmp.m_z - m_z, 2);
+		
+		return Math.sqrt(distanceX + distanceY + distanceZ);
+	}
+
+	/*
+	 *
+	 */
+	@Override
+	public double getCentralAngle(Coordinate point) {
+		SphericCoordinate tmp_this = this.asSphericCoordinate();
+		SphericCoordinate tmp_other = point.asSphericCoordinate();
+		return tmp_this.getCentralAngle(tmp_other);
+	}
+
+	/*
+	 *
+	 */
+	public boolean equals(CartesianCoordinate point) {
+		return isEqual(point);
 	}
 
 }

@@ -10,7 +10,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 	private double m_phi;
 	private double m_theta;
 	private double m_radius;
-	private final double ETTA = 10e-7;
 
 	/*
 	 *
@@ -78,21 +77,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 		return Math.toDegrees(centralAngle);
 	}
 
-	/*
-	 *
-	 */
-	@Override
-	public boolean isEqual(Coordinate point) {
-		return isAlmostEqual(point.asSphericCoordinate(), ETTA);
-	}
-
-	/*
-	 *
-	 */
-	private boolean isAlmostEqual(SphericCoordinate point, double etta) {
-		if( getCartesianDistance(point) < etta) {
-			return true;
-		}
-		return false;
+	public boolean equals(SphericCoordinate point) {
+		return isEqual(point);
 	}
 }
