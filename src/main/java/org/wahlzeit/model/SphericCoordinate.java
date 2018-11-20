@@ -76,14 +76,6 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public boolean isEqual(CartesianCoordinate point) {
-		SphericCoordinate tmp = point.asSphericCoordinate();
-		return isEqual(tmp);
-	}
-
-	/*
-	 *
-	 */
 	public boolean isEqual(Coordinate point) {
 		return isAlmostEqual(point.asSphericCoordinate(), ETTA);
 	}
@@ -92,11 +84,7 @@ public class SphericCoordinate implements Coordinate{
 	 *
 	 */
 	private boolean isAlmostEqual(SphericCoordinate point, double etta) {
-		double diff_phi = Math.abs(m_phi - point.m_phi);
-		double diff_theta = Math.abs(m_theta - point.m_theta);
-		double diff_radius = Math.abs(m_radius - point.m_radius);
-
-		if (diff_phi < etta && diff_theta < etta  && diff_radius < etta){
+		if( getCartesianDistance(point) < etta) {
 			return true;
 		}
 		return false;
