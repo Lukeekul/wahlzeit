@@ -5,7 +5,6 @@ import org.wahlzeit.model.SphericCoordinate;
 import java.lang.Math;
 
 public class CartesianCoordinate implements Coordinate{
-// public class CartesianCoordinate {
 	
 	private double m_x;
 	private double m_y;
@@ -36,20 +35,13 @@ public class CartesianCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public double getCartesianDistance(CartesianCoordinate point) {
-		double distanceX = Math.pow(point.m_x - m_x, 2);
-		double distanceY = Math.pow(point.m_y - m_y, 2);
-		double distanceZ = Math.pow(point.m_z - m_z, 2);
+	public double getCartesianDistance(Coordinate point) {
+		CartesianCoordinate tmp = point.asCartesianCoordinate();
+		double distanceX = Math.pow(tmp.m_x - m_x, 2);
+		double distanceY = Math.pow(tmp.m_y - m_y, 2);
+		double distanceZ = Math.pow(tmp.m_z - m_z, 2);
 		
 		return Math.sqrt(distanceX + distanceY + distanceZ);
-	}
-
-	/*
-	 *
-	 */
-	public double getCartesianDistance(SphericCoordinate point) {
-		CartesianCoordinate tmp = point.asCartesianCoordinate();
-		return getCartesianDistance(tmp);
 	}
 
 	/*
@@ -70,8 +62,8 @@ public class CartesianCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public boolean isEqual(CartesianCoordinate point) {
-		return isAlmostEqual(point, ETTA);
+	public boolean isEqual(Coordinate point) {
+		return isAlmostEqual(point.asCartesianCoordinate(), ETTA);
 	}
 
 	/*
@@ -84,25 +76,10 @@ public class CartesianCoordinate implements Coordinate{
 	/*
 	 *
 	 */
-	public boolean isEqual(SphericCoordinate point) {
-		return isEqual(point.asCartesianCoordinate());
-	}
-
-	/*
-	 *
-	 */
-	public double getCentralAngle(CartesianCoordinate point) {
+	public double getCentralAngle(Coordinate point) {
 		SphericCoordinate tmp_this = this.asSphericCoordinate();
 		SphericCoordinate tmp_other = point.asSphericCoordinate();
 		return tmp_this.getCentralAngle(tmp_other);
-	}
-
-	/*
-	 *
-	 */
-	public double getCentralAngle(SphericCoordinate point) {
-		SphericCoordinate tmp = this.asSphericCoordinate();
-		return tmp.getCentralAngle(point);
 	}
 
 	/*
