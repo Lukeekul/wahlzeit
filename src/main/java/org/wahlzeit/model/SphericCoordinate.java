@@ -1,10 +1,11 @@
 package org.wahlzeit.model;
 
 import org.wahlzeit.interfaces.Coordinate;
+import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.model.CartesianCoordinate;
 import java.lang.Math;
 
-public class SphericCoordinate implements Coordinate{
+public class SphericCoordinate extends AbstractCoordinate{
 
 	private double m_phi;
 	private double m_theta;
@@ -35,6 +36,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
+	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
 		double x = m_radius * Math.sin(m_theta) * Math.cos(m_phi);
 		double y = m_radius * Math.sin(m_theta) * Math.sin(m_phi);
@@ -45,6 +47,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
+	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		return this;
 	}
@@ -52,6 +55,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
+	@Override
 	public double getCartesianDistance(Coordinate point) {
 		CartesianCoordinate tmp_this = this.asCartesianCoordinate();
 		CartesianCoordinate tmp_other = point.asCartesianCoordinate();
@@ -61,6 +65,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
+	@Override
 	public double getCentralAngle(Coordinate point) {
 		SphericCoordinate coordinate = point.asSphericCoordinate();
 		double delta_x = Math.cos(coordinate.m_phi) * Math.cos(coordinate.m_theta) - Math.cos(m_phi) * Math.cos(m_theta);
@@ -76,6 +81,7 @@ public class SphericCoordinate implements Coordinate{
 	/*
 	 *
 	 */
+	@Override
 	public boolean isEqual(Coordinate point) {
 		return isAlmostEqual(point.asSphericCoordinate(), ETTA);
 	}
