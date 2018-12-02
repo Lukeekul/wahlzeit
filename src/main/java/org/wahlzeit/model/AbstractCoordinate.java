@@ -26,4 +26,32 @@ public abstract class AbstractCoordinate implements Coordinate{
 		}
 		return false;
 	}
+
+	protected abstract void assertIsValidCoordinate() throws IllegalArgumentException;
+
+	protected void assertIsNonNullArgument(Coordinate point) throws NullPointerException {
+		if(point == null) {
+			String msg = " Coordinate is null";
+			throw new NullPointerException(msg);
+		}
+	}
+
+	protected void assertClassInvariants() throws IllegalStateException {
+		assertIsValidCoordinate();
+	}
+
+	protected void assertIsValidValue(double value) throws IllegalStateException {
+		if(!(value >= 0 && value < Double.POSITIVE_INFINITY)) {
+			String msg = "Value " + String.valueOf(value) + " must be positive and smaller than inf";
+			throw new IllegalStateException(msg);
+		}
+	}
+
+	protected void assertIsValidAngle(double value) throws IllegalStateException {
+		if(!(value >= 0 && value < 360.0)) {
+			String msg = "Angle " + String.valueOf(value) + " must be positive and smaller than inf";
+			throw new IllegalStateException(msg);
+		}
+	}
+
 }

@@ -3,6 +3,8 @@ package org.wahlzeit.model;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
@@ -14,6 +16,9 @@ public class CoordinateTest {
 	SphericCoordinate spher1 = new SphericCoordinate(1,2,3);
 	SphericCoordinate spher2 = new SphericCoordinate(45.0, 90.0, 100.0);
 	final double ETTA = 100;
+
+	@Rule
+	public final ExpectedException exception = ExpectedException.none();
 
 	@Test
 	public void testCoordinateConversion() {
@@ -69,5 +74,21 @@ public class CoordinateTest {
 		assertTrue(Math.abs(angle2 - angle3) < ETTA);
 		assertTrue(Math.abs(angle3 - angle4) < ETTA);
 		assertTrue(Math.abs(angle4 - angle1) < ETTA);
+	}
+
+	@Test
+	public void testCoordinateInvalidValues() {
+
+		exception.expect(IllegalArgumentException.class);
+		CartesianCoordinate invalid1 = new CartesianCoordinate(-1.0, -2.0, -3.0);
+
+		exception.expect(NullPointerException.class);
+		CartesianCoordinate invalid2 = new CartesianCoordinate(null);
+
+		exception.expect(IllegalArgumentException.class);
+		SphericCoordinate invalid3 = new SphericCoordinate(270.0, 361.0, -1.0);
+
+		exception.expect(NullPointerException.class);
+		SphericCoordinate invalid4 = new  SphericCoordinate(invalid3);
 	}
 }
