@@ -36,6 +36,8 @@ public abstract class AbstractCoordinate implements Coordinate{
 		}
 	}
 
+	protected abstract void assertIsValidInput(double a, double b, double c) throws IllegalArgumentException;
+
 	protected void assertClassInvariants() throws IllegalStateException {
 		assertIsValidCoordinate();
 	}

@@ -15,9 +15,8 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 *
 	 */
 	public SphericCoordinate(double phi_degree, double theta_degree, double radius) {
-		assert radius >= 0.0;
-		assert phi_degree >= 0.0 && phi_degree < 360.0;
-		assert theta_degree >= 0.0 && theta_degree < 180.0;
+		assertIsValidInput(phi_degree, theta_degree, radius);
+
 		m_phi =  Math.toRadians(phi_degree);
 		m_theta = Math.toRadians(theta_degree);
 		m_radius = radius;
@@ -122,6 +121,22 @@ public class SphericCoordinate extends AbstractCoordinate{
 			throw new IllegalArgumentException(msg);
 		}
 		if(m_theta < 0.0 || m_theta > Math.PI) {
+			String msg = "theta must be within 0 and 180 degrees";
+			throw new IllegalArgumentException(msg);
+		}
+	}
+
+	@Override
+	protected void assertIsValidInput(double phi, double theta, double radius) {
+		if(radius < 0) {
+			String msg = "radius cannot be negative";
+			throw new IllegalArgumentException(msg);
+		}
+		if(phi < 0.0 || phi > 360.0) {
+			String msg = "phi must be within 0 and 360 degrees";
+			throw new IllegalArgumentException(msg);
+		}
+		if(theta < 0.0 || theta > 180.0) {
 			String msg = "theta must be within 0 and 180 degrees";
 			throw new IllegalArgumentException(msg);
 		}

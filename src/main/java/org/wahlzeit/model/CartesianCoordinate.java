@@ -15,9 +15,8 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 *
 	 */
 	public CartesianCoordinate(double x, double y, double z) {
-		// assert x >= 0.0;
-		// assert y >= 0.0;
-		// assert z >= 0.0;
+		assertIsValidInput(x, y, z);
+
 		m_x = x;
 		m_y = y;
 		m_z = z;
@@ -111,15 +110,20 @@ public class CartesianCoordinate extends AbstractCoordinate{
 
 	@Override
 	protected void assertIsValidCoordinate() {
-		if(m_x < 0 || m_x >= Double.POSITIVE_INFINITY) {
+		assertIsValidInput(m_x, m_y, m_z);
+	}
+
+	@Override
+	protected void assertIsValidInput(double x, double y, double z) {
+		if(x < 0 || x >= Double.POSITIVE_INFINITY) {
 			String msg = "x cannot be negative";
 			throw new IllegalArgumentException(msg);
 		}
-		if(m_y < 0 || m_y >= Double.POSITIVE_INFINITY) {
+		if(y < 0 || y >= Double.POSITIVE_INFINITY) {
 			String msg = "y cannot be negative";
 			throw new IllegalArgumentException(msg);
 		}
-		if(m_z < 0 || m_z >= Double.POSITIVE_INFINITY) {
+		if(z < 0 || z >= Double.POSITIVE_INFINITY) {
 			String msg = "z cannot be negative";
 			throw new IllegalArgumentException(msg);
 		}
