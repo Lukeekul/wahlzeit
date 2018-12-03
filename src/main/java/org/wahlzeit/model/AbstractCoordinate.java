@@ -21,10 +21,14 @@ public abstract class AbstractCoordinate implements Coordinate{
 	}
 
 	protected boolean isAlmostEqual(Coordinate point) {
+		assertIsNonNullArgument(point);
+		assertClassInvariants();
+		boolean result = false;
 		if(getCartesianDistance(point) < ETTA ) {
-			return true;
+			result = true;
 		}
-		return false;
+		assertClassInvariants();
+		return result;
 	}
 
 	protected abstract void assertIsValidCoordinate() throws IllegalArgumentException;
