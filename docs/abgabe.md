@@ -9,34 +9,22 @@ https://github.com/Lukeekul/wahlzeit
 https://travis-ci.org/Lukeekul/wahlzeit
 
 ## Current Tag
-adap-hw07 on master
+adap-hw08 on master
 
 ## Diff to last tag
-https://github.com/Lukeekul/wahlzeit/compare/adap-hw06...Lukeekul:adap-hw07
+https://github.com/Lukeekul/wahlzeit/compare/adap-hw07...Lukeekul:adap-hw08
 
 # Overview
-* Design-by-Contract implemented for Coordiante Classes
-* Test added to check if specific Exception are thrown
+* Implementing advanced Error Handling for PatternPhoto and Coordinate.
+* Implementing Test for PatternPhotoFactory.
 
 # Details
-## Construction
-* All assert-methods are declared in the *AbstractCoordinate* Class and also declared *protected* since they are not accessible from without these classes
-* All leaf classes of Coordinate shared the declared assert methods, the implementation of those methods can vary and is done within leaf class
 
 ## Implementation
-* *assertIsValidInput*: abstract in *AbstractCoordinate*, implemented in leaf classes, called in constructors to ensure the given parameter values are within correct limits. Throws *IllegalArgumentException*.
-
-* *assertIsValidCoordinate*: abstract in *AbstractCoordinate*, implemented in leaf classes. Called to ensure the member variables are within correct limits. In *SphericCoordinate* the parameter values for the constructor are in degrees, the member variables in radiants, therefore are different implementation is needed. In *CartesianCoordinate* the methods just calles *assertIsValidInputs* with member variables as parameters. Throws *IllegalArgumentException*.
-
-* *assertIsNonNullArgument*: Checks if parameter is *null*, throws *NullPointerException*.
-
-* *assertClassInvariants*: Checks minimal requirement for classes to be true at all time, being valid Coordinate. Calls *assertIsValidCoordinate*, throws *IllegalStateException*.
-
-* *assertIsValidValue*: Checks if a double parameter is within given limits (positive, less than inf). Throws *IllegalStateException*.
-
-* *assertIsValidAngle*: Checks if a double parameter is within given limits (positive, less than 360 degrees). Throws *IllegalStateException*.
+* Using only checked Exceptions to avoid unchecked Exceptions being propagated to higher software level.
+* Location: Make sure Illegal Arguments throw Exception, propagation to caller: The methods setLocation and getLocation are implemented. Exceptions that a thrown by the Design-by-Contract implementation of the Coordinate Classes are not handle here, must be handled by the caller.
+* PatternPhotoFactory: Adding Exceptions in Photo Base Class to be thrown when a PatternPhoto with illegal id is created. The PatternPhotoFactory catches that Exception and creates a PatternPhoto without specific id instead.
 
 ## Test
-* new test is added to check for specific Exception if called with illegal Arguments by using junit as harness.
-* old tests ensure no unintentional violations occure.
+* Adding new ValueTest for PatternPhotoFactory. Two PatternPhotos with same are id are tried to be created. It is ensured no exception at this point is thrown to higher software levels, the PatternPhotoFactory catches the Exception. It is tested that the ids of those to photos are different, as it is expected.
 
