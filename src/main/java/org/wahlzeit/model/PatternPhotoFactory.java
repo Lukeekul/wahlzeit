@@ -4,6 +4,7 @@ package org.wahlzeit.model;
 import org.wahlzeit.model.PhotoFactory;
 import org.wahlzeit.services.LogBuilder;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 
 public class PatternPhotoFactory extends PhotoFactory {
@@ -47,7 +48,14 @@ public class PatternPhotoFactory extends PhotoFactory {
 	 */
 	@Override
 	public PatternPhoto createPhoto(PhotoId id) {
-		return new PatternPhoto(id);
+		PatternPhoto result;
+		try{
+			result = new PatternPhoto(id);
+		} catch (IllegalArgumentException illarg)  {
+			log.log(Level.SEVERE, "Trying to create PatternPhoto with Illegal ID", illarg);
+			result = new PatternPhoto();
+		}
+		return result;
 	}
 
 }

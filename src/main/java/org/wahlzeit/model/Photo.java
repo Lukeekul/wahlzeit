@@ -149,10 +149,15 @@ public class Photo extends DataObject {
 	/**
 	 * @methodtype constructor
 	 */
-	public Photo(PhotoId myId) {
-		id = myId;
+	public Photo(PhotoId myId) throws IllegalArgumentException {
+		if(myId.isNullId()) {
+			String msg = "Requested Photo has Null Id";
+			throw new IllegalArgumentException(msg);
+		} else {
+			id = myId;
 
-		incWriteCount();
+			incWriteCount();
+		}
 	}
 
 	/**
