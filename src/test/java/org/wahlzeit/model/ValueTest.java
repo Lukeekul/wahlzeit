@@ -23,6 +23,8 @@ package org.wahlzeit.model;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 
 /**
  * Test cases for a variety of value object classes.
@@ -142,5 +144,15 @@ public class ValueTest {
 		assert(point1.getCartesianDistance(point2) == 0.0);
 		assert(point1.getCartesianDistance(point3) != 0.0);
 	}
-
+	/**
+	 *
+	 */
+	@Test
+	public void testPatternPhotoId() {
+		PatternPhotoFactory ppf = PatternPhotoFactory.getInstance();
+		PhotoId id = PhotoId.getIdFromInt(12);
+		PatternPhoto photo1 = ppf.createPhoto(id);
+		PatternPhoto photo2 = ppf.createPhoto(id);
+		assertFalse(photo1.getIdAsString() == photo2.getIdAsString());
+	}
 }
