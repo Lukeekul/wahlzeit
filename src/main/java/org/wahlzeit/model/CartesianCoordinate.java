@@ -7,14 +7,14 @@ import java.lang.Math;
 
 public class CartesianCoordinate extends AbstractCoordinate{
 	
-	private double m_x;
-	private double m_y;
-	private double m_z;
+	private final double m_x;
+	private final double m_y;
+	private final double m_z;
 
 	/*
 	 *
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
+	private CartesianCoordinate(double x, double y, double z) {
 		assertIsValidInput(x, y, z);
 
 		m_x = x;
@@ -27,7 +27,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public CartesianCoordinate(CartesianCoordinate point) {
+	private CartesianCoordinate(CartesianCoordinate point) {
 		assertIsNonNullArgument(point);
 
 		m_x = point.m_x;
@@ -127,6 +127,29 @@ public class CartesianCoordinate extends AbstractCoordinate{
 			String msg = "z cannot be negative";
 			throw new IllegalArgumentException(msg);
 		}
+	}
+
+	@Override
+	protected int getNoComponents() {
+		return 3;
+	}
+
+	protected double getComponent(int i) {
+		double result = 0.0;
+		switch(i){
+			case 0:
+				result = m_x;
+				break;
+			case 1:
+				result = m_y;
+				break;
+			case 2:
+				result = m_z;
+				break;
+			default:
+				break;
+		}
+		return result;
 	}
 }
 

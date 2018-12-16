@@ -10,4 +10,5 @@ public interface Coordinate{
 	public double getCentralAngle(Coordinate point);
 	public double getCartesianDistance(Coordinate point);
 	public boolean isEqual(Coordinate point);
+	public Coordinate getCoordinate(double a, double b, double c);
 }
