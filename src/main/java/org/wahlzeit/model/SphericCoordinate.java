@@ -4,9 +4,11 @@ import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.model.CartesianCoordinate;
 import java.lang.Math;
+import java.util.*;
 
 public class SphericCoordinate extends AbstractCoordinate{
 
+	private HashMap<Integer, SphericCoordinate> CoordinateArray;
 	private double m_phi;
 	private double m_theta;
 	private double m_radius;
@@ -47,7 +49,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 		double x = m_radius * Math.sin(m_theta) * Math.cos(m_phi);
 		double y = m_radius * Math.sin(m_theta) * Math.sin(m_phi);
 		double z = m_radius * Math.cos(m_theta);
-		CartesianCoordinate result = new CartesianCoordinate(x, y ,z);
+		CartesianCoordinate result = getCoordinate(x, y ,z);
 
 		assertClassInvariants();
 
@@ -104,10 +106,10 @@ public class SphericCoordinate extends AbstractCoordinate{
 		return result;
 	}
 
-	public boolean equals(SphericCoordinate point) {
+	public boolean isEqual(SphericCoordinate point) {
 		assertIsNonNullArgument(point);
 		assertClassInvariants();
-		return isEqual(point);
+		return equals(point);
 	}
 
 	@Override
@@ -140,5 +142,45 @@ public class SphericCoordinate extends AbstractCoordinate{
 			String msg = "theta must be within 0 and 180 degrees";
 			throw new IllegalArgumentException(msg);
 		}
+	}
+
+	@Override
+	protected int getNoComponents() {
+		return 3;
+	}
+
+	protected double getComponent(int i) {
+		double result = 0.0;
+		switch(i){
+			case 0:
+				result = m_phi;
+				break;
+			case 1:
+				result = m_theta;
+				break;
+			case 2:
+				result = m_radius;
+				break;
+			default:
+				break;
+		}
+		return result;
+	}
+
+	protected SphericCoordinate getHashArrayCoordinate(double a, double b, double c) {
+		int coordinateHash = CoordinateHelper.hashCode(a,b,c);
+
+		SphericCoordinate result = CoordinateArray.get(coordinateHash);
+
+		if(result == null) {
+			synchronized(this) {
+				result = CoordinateArray.get(coordinateHash);
+				if(result == null) {
+					result = new SphericCoordinate(a, b, c);
+					CoordinateArray.put(coordinateHash, result);
+				}
+			}
+		}
+		return result;
 	}
 }

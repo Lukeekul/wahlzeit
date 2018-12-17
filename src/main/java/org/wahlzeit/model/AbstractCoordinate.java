@@ -10,7 +10,6 @@ import org.wahlzeit.model.CoordinateHelper;
 
 public abstract class AbstractCoordinate implements Coordinate{
 
-	protected HashMap CoordinateArray[];
 
 	protected final double ETTA = 10e-7;
 
@@ -89,21 +88,6 @@ public abstract class AbstractCoordinate implements Coordinate{
 		return getHashArrayCoordinate(a, b, c);
 	}
 
-	protected Coordinate getHashArrayCoordinate(double a, double b, double c) {
-		int coordinateHash = CoordinateHelper.hashCode(a,b,c);
-
-		Coordinate result = CoordinateArray.get(coordinateHash);
-
-		if(result == null) {
-			synchronized(this) {
-				result = CoordianteArray.get(coordinateHash);
-				if(result == null) {
-					result = new Coordinate(a, b, c);
-					CoordinateArray.put(coordinateHash, result);
-				}
-			}
-		}
-		return result;
-	}
+	protected abstract Coordinate getHashArrayCoordinate(double a, double b, double c);
 
 }

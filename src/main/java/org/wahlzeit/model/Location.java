@@ -11,7 +11,7 @@ public class Location {
 	}
 
 	public CartesianCoordinate getLocation() throws NullPointerException {
-		CartesianCoordinate result = new CartesianCoordinate(0,0,0);
+		CartesianCoordinate result = getCoordinate(0,0,0);
 		if( coordinate == null) {
 			String msg = "Requested Coordinate is Null";
 			throw new NullPointerException(msg);

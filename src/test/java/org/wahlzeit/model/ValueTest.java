@@ -135,8 +135,8 @@ public class ValueTest {
 	@Test
 	public void testCoordinate() {
 		CartesianCoordinate point1 = CartesianCoordinate.getCoordinate(1.0, 1.0, 0.0);
-		CartesianCoordinate point2 = new CartesianCoordinate(1.0, 1.0, 0.0);
-		CartesianCoordinate point3 = new CartesianCoordinate(2.0, 0.0, 1.0);
+		CartesianCoordinate point2 = CartesianCoordinate.getCoordinate(1.0, 1.0, 0.0);
+		CartesianCoordinate point3 = CartesianCoordinate.getCoordinate(2.0, 0.0, 1.0);
 		
 		assertTrue(point1.isEqual(point2));
 		assertTrue(!point3.isEqual(point2));

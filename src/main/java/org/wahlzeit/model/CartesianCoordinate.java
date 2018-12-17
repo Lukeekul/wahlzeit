@@ -4,9 +4,11 @@ import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.SphericCoordinate;
 import java.lang.Math;
+import java.util.*;
 
 public class CartesianCoordinate extends AbstractCoordinate{
 	
+	private HashMap<Integer, CartesianCoordinate> CoordinateArray;
 	private final double m_x;
 	private final double m_y;
 	private final double m_z;
@@ -55,7 +57,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		double radius = Math.sqrt(Math.pow(m_x, 2) + Math.pow(m_y, 2) + Math.pow(m_z, 2));
 		double theta = Math.acos(m_z/radius);
 		double phi = Math.atan(m_y/m_x);
-		SphericCoordinate result = new SphericCoordinate(Math.toDegrees(phi), Math.toDegrees(theta), radius);
+		SphericCoordinate result = getCoordinate(Math.toDegrees(phi), Math.toDegrees(theta), radius);
 
 		assertClassInvariants();
 		return result;
@@ -102,10 +104,10 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public boolean equals(CartesianCoordinate point) {
+	public boolean isEqual(Coordinate point) {
 		assertIsNonNullArgument(point);
 		assertClassInvariants();
-		return isEqual(point);
+		return equals(point);
 	}
 
 	@Override
@@ -148,6 +150,27 @@ public class CartesianCoordinate extends AbstractCoordinate{
 				break;
 			default:
 				break;
+		}
+		return result;
+	}
+
+	public CartesianCoordinate getCartesianCoordinate(double a, double b, double c) {
+		return getHashArrayCoordinate(a, b, c);
+	}
+
+	protected CartesianCoordinate getHashArrayCoordinate(double a, double b, double c) {
+		int coordinateHash = CoordinateHelper.hashCode(a,b,c);
+
+		CartesianCoordinate result = CoordinateArray.get(coordinateHash);
+
+		if(result == null) {
+			synchronized(this) {
+				result = CoordinateArray.get(coordinateHash);
+				if(result == null) {
+					result = new CartesianCoordinate(a, b, c);
+					CoordinateArray.put(coordinateHash, result);
+				}
+			}
 		}
 		return result;
 	}
