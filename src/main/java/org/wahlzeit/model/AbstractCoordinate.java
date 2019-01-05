@@ -84,10 +84,10 @@ public abstract class AbstractCoordinate implements Coordinate{
 		return true;
 	}
 
-	public Coordinate getCoordinate(double a, double b, double c) {
-		return getHashArrayCoordinate(a, b, c);
-	}
+	// public Coordinate getCoordinate(double a, double b, double c) {
+	// 	return getHashArrayCoordinate(a, b, c);
+	// }
 
-	protected abstract Coordinate getHashArrayCoordinate(double a, double b, double c);
+	// protected abstract Coordinate getHashArrayCoordinate(double a, double b, double c);
 
 }

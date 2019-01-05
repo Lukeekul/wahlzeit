@@ -3,12 +3,12 @@ package org.wahlzeit.model;
 import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.SphericCoordinate;
+import org.wahlzeit.model.CoordinateFactory;
 import java.lang.Math;
 import java.util.*;
 
 public class CartesianCoordinate extends AbstractCoordinate{
-	
-	private HashMap<Integer, CartesianCoordinate> CoordinateArray;
+
 	private final double m_x;
 	private final double m_y;
 	private final double m_z;
@@ -16,7 +16,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	private CartesianCoordinate(double x, double y, double z) {
+	public CartesianCoordinate(double x, double y, double z) {
 		assertIsValidInput(x, y, z);
 
 		m_x = x;
@@ -29,7 +29,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	private CartesianCoordinate(CartesianCoordinate point) {
+	public CartesianCoordinate(CartesianCoordinate point) {
 		assertIsNonNullArgument(point);
 
 		m_x = point.m_x;
@@ -57,7 +57,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		double radius = Math.sqrt(Math.pow(m_x, 2) + Math.pow(m_y, 2) + Math.pow(m_z, 2));
 		double theta = Math.acos(m_z/radius);
 		double phi = Math.atan(m_y/m_x);
-		SphericCoordinate result = getCoordinate(Math.toDegrees(phi), Math.toDegrees(theta), radius);
+		SphericCoordinate result = CoordinateFactory.getSphericCoordinate(Math.toDegrees(phi), Math.toDegrees(theta), radius);
 
 		assertClassInvariants();
 		return result;
@@ -150,27 +150,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 				break;
 			default:
 				break;
-		}
-		return result;
-	}
-
-	public CartesianCoordinate getCartesianCoordinate(double a, double b, double c) {
-		return getHashArrayCoordinate(a, b, c);
-	}
-
-	protected CartesianCoordinate getHashArrayCoordinate(double a, double b, double c) {
-		int coordinateHash = CoordinateHelper.hashCode(a,b,c);
-
-		CartesianCoordinate result = CoordinateArray.get(coordinateHash);
-
-		if(result == null) {
-			synchronized(this) {
-				result = CoordinateArray.get(coordinateHash);
-				if(result == null) {
-					result = new CartesianCoordinate(a, b, c);
-					CoordinateArray.put(coordinateHash, result);
-				}
-			}
 		}
 		return result;
 	}

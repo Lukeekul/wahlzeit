@@ -8,13 +8,21 @@ import org.junit.rules.ExpectedException;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+import org.wahlzeit.model.CoordinateFactory;
+
 public class CoordinateTest {
 
-	CartesianCoordinate cart1 = new CartesianCoordinate(1,2,3);
-	CartesianCoordinate cart2 = new CartesianCoordinate(42.0, 100.1, 32.5);
+	// CartesianCoordinate cart1 = new CartesianCoordinate(1,2,3);
+	// CartesianCoordinate cart2 = new CartesianCoordinate(42.0, 100.1, 32.5);
 
-	SphericCoordinate spher1 = new SphericCoordinate(1,2,3);
-	SphericCoordinate spher2 = new SphericCoordinate(45.0, 90.0, 100.0);
+	// SphericCoordinate spher1 = new SphericCoordinate(1,2,3);
+	// SphericCoordinate spher2 = new SphericCoordinate(45.0, 90.0, 100.0);
+
+	CartesianCoordinate cart1 = CoordinateFactory.getCartesianCoordinate(1,2,3);
+	CartesianCoordinate cart2 = CoordinateFactory.getCartesianCoordinate(42.0, 100.1, 32.5);
+
+	SphericCoordinate spher1 = CoordinateFactory.getSphericCoordinate(1,2,3);
+	SphericCoordinate spher2 = CoordinateFactory.getSphericCoordinate(45.0, 90.0, 100.0);
 	final double ETTA = 100;
 
 	@Rule
@@ -80,13 +88,13 @@ public class CoordinateTest {
 	public void testCoordinateInvalidValues() {
 
 		exception.expect(IllegalArgumentException.class);
-		CartesianCoordinate invalid1 = new CartesianCoordinate(-1.0, -2.0, -3.0);
+		CartesianCoordinate invalid1 = CoordinateFactory.getCartesianCoordinate(-1.0, -2.0, -3.0);
 
 		exception.expect(NullPointerException.class);
 		CartesianCoordinate invalid2 = new CartesianCoordinate(null);
 
 		exception.expect(IllegalArgumentException.class);
-		SphericCoordinate invalid3 = new SphericCoordinate(270.0, 361.0, -1.0);
+		SphericCoordinate invalid3 = CoordinateFactory.getSphericCoordinate(270.0, 361.0, -1.0);
 
 		exception.expect(NullPointerException.class);
 		SphericCoordinate invalid4 = new  SphericCoordinate(invalid3);

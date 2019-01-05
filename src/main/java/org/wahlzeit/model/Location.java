@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 
-import org.wahlzeit.model.CartesianCoordinate;
+import org.wahlzeit.model.CoordinateFactory;
 
 public class Location {
 	
@@ -11,7 +11,7 @@ public class Location {
 	}
 
 	public CartesianCoordinate getLocation() throws NullPointerException {
-		CartesianCoordinate result = getCoordinate(0,0,0);
+		CartesianCoordinate result = CoordinateFactory.getCartesianCoordinate(0,0,0);
 		if( coordinate == null) {
 			String msg = "Requested Coordinate is Null";
 			throw new NullPointerException(msg);

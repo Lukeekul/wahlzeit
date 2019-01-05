@@ -3,15 +3,15 @@ package org.wahlzeit.model;
 import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.model.CartesianCoordinate;
+import org.wahlzeit.model.CoordinateFactory;
 import java.lang.Math;
 import java.util.*;
 
 public class SphericCoordinate extends AbstractCoordinate{
 
-	private HashMap<Integer, SphericCoordinate> CoordinateArray;
-	private double m_phi;
-	private double m_theta;
-	private double m_radius;
+	private final double m_phi;
+	private final double m_theta;
+	private final double m_radius;
 
 	/*
 	 *
@@ -49,7 +49,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 		double x = m_radius * Math.sin(m_theta) * Math.cos(m_phi);
 		double y = m_radius * Math.sin(m_theta) * Math.sin(m_phi);
 		double z = m_radius * Math.cos(m_theta);
-		CartesianCoordinate result = getCoordinate(x, y ,z);
+		CartesianCoordinate result = CoordinateFactory.getCartesianCoordinate(x, y ,z);
 
 		assertClassInvariants();
 
@@ -106,7 +106,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 		return result;
 	}
 
-	public boolean isEqual(SphericCoordinate point) {
+	public boolean isEqual(Coordinate point) {
 		assertIsNonNullArgument(point);
 		assertClassInvariants();
 		return equals(point);
@@ -163,23 +163,6 @@ public class SphericCoordinate extends AbstractCoordinate{
 				break;
 			default:
 				break;
-		}
-		return result;
-	}
-
-	protected SphericCoordinate getHashArrayCoordinate(double a, double b, double c) {
-		int coordinateHash = CoordinateHelper.hashCode(a,b,c);
-
-		SphericCoordinate result = CoordinateArray.get(coordinateHash);
-
-		if(result == null) {
-			synchronized(this) {
-				result = CoordinateArray.get(coordinateHash);
-				if(result == null) {
-					result = new SphericCoordinate(a, b, c);
-					CoordinateArray.put(coordinateHash, result);
-				}
-			}
 		}
 		return result;
 	}
