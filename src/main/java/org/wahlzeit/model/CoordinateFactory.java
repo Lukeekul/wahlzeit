@@ -22,6 +22,19 @@ public class CoordinateFactory {
 		return coordinate;
 	}
 
+	public static CartesianCoordinate getCartesianCoordinate(CartesianCoordinate coordinate) {
+		CartesianCoordinate result;
+		if(coordinate != null && coordinate.getNoComponents() == 3) {
+			double x = coordinate.getComponent(0);
+			double y = coordinate.getComponent(1);
+			double z = coordinate.getComponent(2);
+			result = getCartesianCoordinate(x, y, z);
+		} else {
+			result = new CartesianCoordinate(coordinate);
+		}
+		return result;
+	}
+
 	public static SphericCoordinate getSphericCoordinate(double phi_degree, double theta_degree , double radius) {
 		int coordinateHash = CoordinateHelper.hashCode(phi_degree, theta_degree, radius);
 
@@ -31,5 +44,18 @@ public class CoordinateFactory {
 			m_SphericCoordinateArray.put(coordinateHash, coordinate);
 		}
 		return coordinate;
+	}
+
+	public static SphericCoordinate getSphericCoordinate(SphericCoordinate coordinate) {
+		SphericCoordinate result;
+		if(coordinate != null && coordinate.getNoComponents() == 3) {
+			double phi = coordinate.getComponent(0);
+			double theta = coordinate.getComponent(1);
+			double radius = coordinate.getComponent(2);
+			result = getSphericCoordinate(phi, theta, radius);
+		} else {
+			result = new SphericCoordinate(coordinate);
+		}
+		return result;
 	}
 }

@@ -91,12 +91,12 @@ public class CoordinateTest {
 		CartesianCoordinate invalid1 = CoordinateFactory.getCartesianCoordinate(-1.0, -2.0, -3.0);
 
 		exception.expect(NullPointerException.class);
-		CartesianCoordinate invalid2 = new CartesianCoordinate(null);
+		CartesianCoordinate invalid2 = CoordinateFactory.getCartesianCoordinate(null);
 
 		exception.expect(IllegalArgumentException.class);
 		SphericCoordinate invalid3 = CoordinateFactory.getSphericCoordinate(270.0, 361.0, -1.0);
 
 		exception.expect(NullPointerException.class);
-		SphericCoordinate invalid4 = new  SphericCoordinate(invalid3);
+		SphericCoordinate invalid4 = CoordinateFactory.getSphericCoordinate(invalid3);
 	}
 }
