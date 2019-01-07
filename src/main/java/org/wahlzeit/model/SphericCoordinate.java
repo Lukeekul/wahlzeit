@@ -16,7 +16,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public SphericCoordinate(double phi_degree, double theta_degree, double radius) {
+	private SphericCoordinate(double phi_degree, double theta_degree, double radius) {
 		assertIsValidInput(phi_degree, theta_degree, radius);
 
 		m_phi =  Math.toRadians(phi_degree);
@@ -29,7 +29,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public SphericCoordinate(SphericCoordinate point){
+	private SphericCoordinate(SphericCoordinate point){
 		assertIsNonNullArgument(point);
 
 		m_phi = point.m_phi;
@@ -37,6 +37,14 @@ public class SphericCoordinate extends AbstractCoordinate{
 		m_radius = point.m_radius;
 
 		assertIsValidCoordinate();
+	}
+
+	public static SphericCoordinate getCoordinate(double phi_degree, double theta_degree, double radius) {
+		return new SphericCoordinate(phi_degree, theta_degree, radius);
+	}
+
+	public static SphericCoordinate getCoordinate(SphericCoordinate c) {
+		return new SphericCoordinate(c);
 	}
 
 	/*

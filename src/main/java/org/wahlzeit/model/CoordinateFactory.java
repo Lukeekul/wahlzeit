@@ -16,7 +16,7 @@ public class CoordinateFactory {
 
 		CartesianCoordinate coordinate = m_CartesianCoordinateArray.get(coordinateHash);
 		if(coordinate == null) {
-			coordinate = new CartesianCoordinate(x, y, z);
+			coordinate = CartesianCoordinate.getCoordinate(x, y, z);
 			m_CartesianCoordinateArray.put(coordinateHash, coordinate);
 		}
 		return coordinate;
@@ -30,7 +30,7 @@ public class CoordinateFactory {
 			double z = coordinate.getComponent(2);
 			result = getCartesianCoordinate(x, y, z);
 		} else {
-			result = new CartesianCoordinate(coordinate);
+			result = CartesianCoordinate.getCoordinate(coordinate);
 		}
 		return result;
 	}
@@ -40,7 +40,7 @@ public class CoordinateFactory {
 
 		SphericCoordinate coordinate = m_SphericCoordinateArray.get(coordinateHash);
 		if(coordinate == null) {
-			coordinate = new SphericCoordinate(phi_degree, theta_degree, radius);
+			coordinate = SphericCoordinate.getCoordinate(phi_degree, theta_degree, radius);
 			m_SphericCoordinateArray.put(coordinateHash, coordinate);
 		}
 		return coordinate;
@@ -54,7 +54,7 @@ public class CoordinateFactory {
 			double radius = coordinate.getComponent(2);
 			result = getSphericCoordinate(phi, theta, radius);
 		} else {
-			result = new SphericCoordinate(coordinate);
+			result = SphericCoordinate.getCoordinate(coordinate);
 		}
 		return result;
 	}

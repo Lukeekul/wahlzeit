@@ -16,7 +16,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public CartesianCoordinate(double x, double y, double z) {
+	private CartesianCoordinate(double x, double y, double z) {
 		assertIsValidInput(x, y, z);
 
 		m_x = x;
@@ -29,7 +29,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	/*
 	 *
 	 */
-	public CartesianCoordinate(CartesianCoordinate point) {
+	private CartesianCoordinate(CartesianCoordinate point) {
 		assertIsNonNullArgument(point);
 
 		m_x = point.m_x;
@@ -37,6 +37,14 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		m_z = point.m_z;
 
 		assertIsValidCoordinate();
+	}
+
+	public static CartesianCoordinate getCoordinate(double x, double y, double z) {
+			return new CartesianCoordinate(x, y, z);
+	}
+
+	public static CartesianCoordinate getCoordinate(CartesianCoordinate c) {
+			return new CartesianCoordinate(c);
 	}
 
 	/*
