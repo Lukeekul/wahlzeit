@@ -4,9 +4,16 @@ import org.wahlzeit.interfaces.Coordinate;
 import org.wahlzeit.model.AbstractCoordinate;
 import org.wahlzeit.model.CartesianCoordinate;
 import org.wahlzeit.model.CoordinateFactory;
+import org.wahlzeit.annotation.PatternInstance;
 import java.lang.Math;
 import java.util.*;
 
+@PatternInstance(
+	patternName = "Flyweight",
+	participants = {
+		"ConcreteFlyweight"
+	}
+)
 public class SphericCoordinate extends AbstractCoordinate{
 
 	private final double m_phi;

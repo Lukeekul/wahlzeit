@@ -3,9 +3,15 @@ package org.wahlzeit.model;
 import org.wahlzeit.model.SphericCoordinate;
 import org.wahlzeit.model.CartesianCoordinate;
 import org.wahlzeit.model.CoordinateHelper;
+import org.wahlzeit.annotation.PatternInstance;
 import java.util.HashMap;
 
-
+@PatternInstance(
+	patternName = "Flyweight",
+	participants = {
+		"FlyweightFactory"
+	}
+)
 public class CoordinateFactory {
 
 	private static final HashMap<Integer, CartesianCoordinate> m_CartesianCoordinateArray = new HashMap<Integer, CartesianCoordinate>();
