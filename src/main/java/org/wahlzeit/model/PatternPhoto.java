@@ -19,5 +19,4 @@ public class PatternPhoto extends Photo {
 	public PatternPhoto(PhotoId myId) {
 		super(myId);
 	}
-	
 }
