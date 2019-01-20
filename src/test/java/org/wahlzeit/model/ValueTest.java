@@ -144,6 +144,7 @@ public class ValueTest {
 		assert(point1.getCartesianDistance(point2) == 0.0);
 		assert(point1.getCartesianDistance(point3) != 0.0);
 	}
+
 	/**
 	 *
 	 */
@@ -151,8 +152,22 @@ public class ValueTest {
 	public void testPatternPhotoId() {
 		PatternPhotoFactory ppf = PatternPhotoFactory.getInstance();
 		PhotoId id = PhotoId.getIdFromInt(12);
-		PatternPhoto photo1 = ppf.createPhoto(id);
-		PatternPhoto photo2 = ppf.createPhoto(id);
+		PatternPhoto photo1 = ppf.createPhoto(id, "blur");
+		PatternPhoto photo2 = ppf.createPhoto(id, "random");
 		assertFalse(photo1.getIdAsString() == photo2.getIdAsString());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void  testPatternType() {
+		PatternPhotoFactory ppf = PatternPhotoFactory.getInstance();
+		String ppType1 = "blur";
+		String ppType2 = "random";
+		PatternPhoto pp1 = ppf.createPhoto(ppType1);
+		PatternPhoto pp2 = ppf.createPhoto(ppType2);
+		assertTrue(pp1.getTypeAsString() == ppType1);
+		assertTrue(pp2.getTypeAsString() == ppType2);
 	}
 }

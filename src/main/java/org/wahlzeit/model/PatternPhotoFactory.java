@@ -45,23 +45,23 @@ public class PatternPhotoFactory extends PhotoFactory {
 	/**
 	 * @methodtype factory
 	 */
-	@Override
-	public PatternPhoto createPhoto() {
-		return new PatternPhoto();
+	//@Override
+	public PatternPhoto createPhoto(String typename) {
+		return new PatternPhoto(typename);
 	}
 
 	/**
 	 * @methodtype factory
 	 * Create new pattern photo from ID
 	 */
-	@Override
-	public PatternPhoto createPhoto(PhotoId id) {
+	//@Override
+	public PatternPhoto createPhoto(PhotoId id, String typename) {
 		PatternPhoto result;
 		try{
-			result = new PatternPhoto(id);
+			result = new PatternPhoto(id, typename);
 		} catch (IllegalArgumentException illarg)  {
 			log.log(Level.SEVERE, "Trying to create PatternPhoto with Illegal ID", illarg);
-			result = new PatternPhoto();
+			result = new PatternPhoto(typename);
 		}
 		return result;
 	}

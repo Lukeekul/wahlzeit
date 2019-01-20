@@ -14,4 +14,8 @@ public class Pattern {
 	public int getId() {
 		return m_id;
 	}
+
+	public PatternType getType() {
+		return m_patternType;
+	}
 };
