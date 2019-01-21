@@ -9,29 +9,32 @@ https://github.com/Lukeekul/wahlzeit
 https://travis-ci.org/Lukeekul/wahlzeit
 
 ## Current Tag
-adap-hw10 on master
+adap-hw11 on master
 
 ## Diff to last tag
-https://github.com/Lukeekul/wahlzeit/compare/adap-hw09-3...Lukeekul:adap-hw10 
-https://github.com/Lukeekul/wahlzeit/compare/adap-hw09...Lukeekul:adap-hw10 (containing corrections from last homework)
+https://github.com/Lukeekul/wahlzeit/compare/adap-hw10...Lukeekul:adap-hw11
 
 # Overview
-* Adding new Annotation *PatternInstance*
-* Adding Annotation to five Design Pattern Instances
+* Adding new Classes *Pattern*, *PatternType* and *PatternManager* in package *org.wahlzeit.model*
+* Adding new member *m_type* to Class *PatternPhoto*
+* Amending Creation of *PatternPhoto* with *Typename*
+* Adding small Test Case for PatternPhoto and PatternType
 
 # Details
 
-## Implementation of Annotation
-* The Annotation *PatternInstance* is impelemented as suggested in lecture and slides in package *org.wahlzeit.annotaion*
-* An additional Annotation *PatternInstances* is implemented to allow for multiple *PatternInstance* Annotations at  a single class.
+## Implementation of Pattern Class
+* Members of this Class are protected PatternType and ID, which can only be set by the Constructor
+* Getter Methods for Id (getId) and PatternType (getType) are implemented
 
-## Annotation of Design Pattern Instances
-* Singleton Pattern: **PhotoFactory**, **PhotoManager**:
-Both PhotoFactory and PhotoMananer should be unique, since PhotoManager is generating unique IDs for Photo and PhotoFactory is creating Photo Objects that uses these IDs.
-* Factory Pattern: **PhotoFactory** along with Photo, **PatternPhotoFactory** along with PatternPhoto:
-For both factories, PhotoFactory and the specialized PatternPhotoFactory, the creation process is hidden in the factories. To get a Photo/PatternPhoto object, the method **createPhoto** can be called without the need to call a Constructor of a Photo/PatternPhoto leaf class.
-* Flyweight Pattern: **CoordinateFactory** along with CartesianCoordinate and SphericCoordinate:
-In order to implement Coordiante as Value Object, the Flyweight Pattern Approach was chosen. CartesianCoordinate and SphericCoordinate both provide static methods that return instances of their own type. The CoordinateFactory manages the object creation for both types of Coordinate to ensure new objects are only created if a Coordinate with the requested parameters does not exsisted yet. Otherwise the existing object is returned.
+## Implementation of PatternType Class
+* The private Member m\_name represents the name of the Type and has its own getter methode (getTypeAsString)
+* The protected Member m\_superType represents the SuperType of the Type, its default is null. It has its own getter (getSuperType) and setter (setSuperType) methodes
 
-# Corrections for last homework (adap-hw09)
-* A new Class **CoordinateFactory** is added, that takes care of HashMap handling of the instances for each typeof Coordinates. The Constructor of each Coordinate leaf class are private, their member variables final. Through the public method **getCoordinate** an instance is returned. By this approach, a Coordinate instance can still be created without the factory, if not desired as Value Object. The Factory will check first if an instance with the requested parameters and type already exists and will create will call the **getCoordinate** method only if that is not the case. Otherwise the already existing object from the HashMap will be returned.
+* For Subtypes a protected HashSet m\_subTypes is implemented into which every new subtype of the instance has to entered in. This can be done with the methode addSubType. The methode isSubtype checks wheter m\_superType is null, therefore the instance is not a subType. By given a Pattern instance, the methode hasInstance checks wheter this given instance of Pattern has set a PatternType. The methode getSubTypeIterator returns an iterator to the member subTypes and the methode createInstance returns a new Pattern instance.
+
+## Implementation of PatternManager Class
+* The PatternManager takes care of the creation of new Pattern, by putting them into its private HasMap by assuring that the Id of the Pattern instances are consecutive.
+
+## Test
+* A simple Test Case (testPatternType) in ValueTests asserts that the set Types at object creation are the same as  attached to the objects.
+
