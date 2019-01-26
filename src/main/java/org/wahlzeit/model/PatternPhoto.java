@@ -17,7 +17,7 @@ public class PatternPhoto extends Photo {
 
 	public PatternPhoto(String typename) {
 		super();
-		m_type  = PatternManager.createPattern(typename);
+		//m_type  = PatternManager.createPattern(typename);
 	}
 
 	public PatternPhoto(PhotoId myId, String typename) {
